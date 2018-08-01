@@ -2,4 +2,9 @@
     <string name="app_name">LeTran_CE02</string>
     <string name="btn_Submit">SUBMIT GUESS</string>
     <string name="error">One or more fields is empty</string>
+    <string name="lose">You Lost!</string>
+    <string name="loseMessage">Good luck next time!</string>
+    <string name="win">You Won!</string>
+    <string name="winMessage">Hooray! Congratulations!</string>
+    <string name="dialog_pos_btn">One More Time!</string>
 </resources>
