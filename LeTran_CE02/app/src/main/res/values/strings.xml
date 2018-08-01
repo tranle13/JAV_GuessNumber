@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">LeTran_CE02</string>
     <string name="btn_Submit">SUBMIT GUESS</string>
+    <string name="error">One or more fields is empty</string>
 </resources>
