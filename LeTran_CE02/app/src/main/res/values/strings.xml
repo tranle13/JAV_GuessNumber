@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LeTran_CE02</string>
+    <string name="btn_Submit">SUBMIT GUESS</string>
 </resources>
