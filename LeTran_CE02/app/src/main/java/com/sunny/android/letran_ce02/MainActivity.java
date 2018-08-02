@@ -6,7 +6,6 @@
 package com.sunny.android.letran_ce02;
 
 import android.content.DialogInterface;
-import android.content.res.ColorStateList;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,22 +15,18 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
     public class MainActivity extends AppCompatActivity {
 
         // Create necessary variables
-        static final String TAG = "GUESSNUM";
+        private static final String TAG = "GUESSNUM";
         private final Random rnd = new Random();
-        private ArrayList<Integer> randomNums = new ArrayList<>();
-        private static final int MAX_NUM_VALUE = 10;
-        private static final int EMPTY = -1;
+        private ArrayList<Integer> randomNums;
         private int numOfTurns = 4;
         private Toast tst_Message = null;
-        private final int[] textIDs = {R.id.txt_FirstNum, R.id.txt_SecondNum, R.id.txt_ThirdNum, R.id.txt_FourthNum};
-        private ArrayList<Integer> inputNum = new ArrayList<>();
+        private ArrayList<Integer> inputNum;
         private int originalColor = -1;
 
         @Override
@@ -39,13 +34,15 @@ import java.util.Random;
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
 
+            randomNums = new ArrayList<>();
+            inputNum = new ArrayList<>();
             originalColor = ((EditText)findViewById(R.id.txt_FirstNum)).getCurrentTextColor();
             randomizeNum();
             findViewById(R.id.btn_SubmitGuess).setOnClickListener(submitTapped);
         }
 
         // Create click listener for the Submit button
-        private View.OnClickListener submitTapped = new View.OnClickListener() {
+        private final View.OnClickListener submitTapped = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -70,11 +67,11 @@ import java.util.Random;
                         if (numOfTurns > 0) {
                             numOfTurns -= 1;
 
-                            String remainTurns = "";
+                            String remainTurns;
 
                             if (numOfTurns > 1) {
                                 remainTurns = "You have " + numOfTurns + " turns left!";
-                            } else if (numOfTurns > 0 && numOfTurns < 2) {
+                            } else {
                                 remainTurns = "You have " + numOfTurns + " turn left!";
                             }
 
@@ -84,7 +81,7 @@ import java.util.Random;
 
 
 
-                        if ((inputNum.get(0) == randomNums.get(0)) && (inputNum.get(1) == randomNums.get(1)) && (inputNum.get(2) == randomNums.get(2)) && (inputNum.get(3) == randomNums.get(3))) {
+                        if ((inputNum.get(0).equals(randomNums.get(0))) && (inputNum.get(1).equals(randomNums.get(1))) && (inputNum.get(2).equals(randomNums.get(2))) && (inputNum.get(3).equals(randomNums.get(3)))) {
                             alertDialog(R.string.win, R.string.winMessage, R.drawable.win_icon);
                         } else if (numOfTurns == 0){
                             alertDialog(R.string.lose, R.string.loseMessage, R.drawable.lose_icon);
@@ -101,6 +98,7 @@ import java.util.Random;
             }
         };
 
+        // Function to build alert dialog
         private void alertDialog(int title, int message, int icon) {
             tst_Message.cancel();
             tst_Message = null;
@@ -116,10 +114,9 @@ import java.util.Random;
             });
             builder.show();
         }
+
         // Function to compare whatever input in the edit text to the random numbers
         private void checkTexts() {
-            int colorSelection = EMPTY;
-
             EditText firstText = (EditText) findViewById(R.id.txt_FirstNum);
             EditText secText = (EditText) findViewById(R.id.txt_SecondNum);
             EditText thirdText = (EditText) findViewById(R.id.txt_ThirdNum);
@@ -141,12 +138,12 @@ import java.util.Random;
             if (randomNums.size() > 0 && inputNum.size() == 4) {
                 for (int i = 0; i < randomNums.size(); i++) {
                     Log.i(TAG, "randomNum: " + randomNums.get(i));
-
                 }
-                for (int i = 0; i < randomNums.size(); i++) {
-                    int colorID = EMPTY;
 
-                    if (inputNum.get(i) == randomNums.get(i)) {
+                for (int i = 0; i < randomNums.size(); i++) {
+                    int colorID;
+
+                    if (inputNum.get(i).equals(randomNums.get(i))) {
                         colorID = R.color.green;
                     } else if (inputNum.get(i) > 4) {
                         colorID = R.color.red;
@@ -171,7 +168,6 @@ import java.util.Random;
         private void reset() {
             randomizeNum();
             numOfTurns = 4;
-
 
             EditText firstNum = (EditText) findViewById(R.id.txt_FirstNum);
             firstNum.setText("");
