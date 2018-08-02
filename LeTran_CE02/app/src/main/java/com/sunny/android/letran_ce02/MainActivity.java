@@ -10,7 +10,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Selection;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -21,7 +20,6 @@ import java.util.Random;
     public class MainActivity extends AppCompatActivity {
 
         // Create necessary variables
-        private static final String TAG = "GUESSNUM";
         private final Random rnd = new Random();
         private ArrayList<Integer> randomNums;
         private int numOfTurns = 4;
@@ -78,9 +76,6 @@ import java.util.Random;
                             tst_Message = Toast.makeText(MainActivity.this, remainTurns, Toast.LENGTH_SHORT);
                         }
 
-
-
-
                         if ((inputNum.get(0).equals(randomNums.get(0))) && (inputNum.get(1).equals(randomNums.get(1))) && (inputNum.get(2).equals(randomNums.get(2))) && (inputNum.get(3).equals(randomNums.get(3)))) {
                             alertDialog(R.string.win, R.string.winMessage, R.drawable.win_icon);
                         } else if (numOfTurns == 0){
@@ -115,7 +110,7 @@ import java.util.Random;
             builder.show();
         }
 
-        // Function to compare whatever input in the edit text to the random numbers
+        // Function to compare whatever input in the edit text to the random numbers and get the colors
         private void checkTexts() {
             EditText firstText = (EditText) findViewById(R.id.txt_FirstNum);
             EditText secText = (EditText) findViewById(R.id.txt_SecondNum);
@@ -137,12 +132,7 @@ import java.util.Random;
 
             if (randomNums.size() > 0 && inputNum.size() == 4) {
                 for (int i = 0; i < randomNums.size(); i++) {
-                    Log.i(TAG, "randomNum: " + randomNums.get(i));
-                }
-
-                for (int i = 0; i < randomNums.size(); i++) {
                     int colorID;
-
                     if (inputNum.get(i).equals(randomNums.get(i))) {
                         colorID = R.color.green;
                     } else if (inputNum.get(i) > 4) {
@@ -181,7 +171,6 @@ import java.util.Random;
             EditText fourthNum = (EditText) findViewById(R.id.txt_FourthNum);
             fourthNum.setText("");
             fourthNum.setTextColor(originalColor);
-
             Selection.setSelection(firstNum.getText(), firstNum.getSelectionStart());
             firstNum.requestFocus();
         }
