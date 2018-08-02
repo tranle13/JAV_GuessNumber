@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:inputType="number" />
+            android:inputType="number"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/txt_SecondNum"
@@ -30,7 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/txt_ThirdNum"
@@ -38,7 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:maxLength="1"/>
 
         <EditText
             android:id="@+id/txt_FourthNum"
@@ -46,7 +49,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:maxLength="1"/>
 
     </LinearLayout>
 
